@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Community Event Management</title>
+
+    <style>
+
+        /* ================= GENERAL ================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #7c3aed
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* ================= LOGIN CONTAINER ================= */
+
+        .login-container {
+
+            width: 100%;
+            max-width: 420px;
+
+            background-color: white;
+
+            padding: 40px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+
+        /* ================= LOGO ================= */
+
+        .logo {
+
+            text-align: center;
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: #4f46e5;
+
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #666;
+
+            margin-bottom: 30px;
+
+            font-size: 15px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: 600;
+
+            color: #333;
+        }
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 6px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+
+            border-color: #4f46e5;
+
+            box-shadow:
+                0 0 0 2px rgba(79, 70, 229, 0.1);
+        }
+
+
+        /* ================= PASSWORD ================= */
+
+        .password-container {
+
+            position: relative;
+        }
+
+        .password-container input {
+
+            padding-right: 70px;
+        }
+
+        .show-password {
+
+            position: absolute;
+
+            right: 12px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: none;
+
+            color: #4f46e5;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+        /* ================= OPTIONS ================= */
+
+        .options {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+
+            font-size: 14px;
+        }
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #555;
+        }
+
+        .remember input {
+
+            cursor: pointer;
+        }
+
+        .forgot-password {
+
+            color: #4f46e5;
+
+            font-weight: 500;
+        }
+
+        .forgot-password:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            background-color: #4f46e5;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 6px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .login-button:hover {
+
+            background-color: #4338ca;
+        }
+
+
+        /* ================= MESSAGE ================= */
+
+        #message {
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= REGISTER ================= */
+
+        .register-text {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #666;
+
+            font-size: 14px;
+        }
+
+        .register-text a {
+
+            color: #4f46e5;
+
+            font-weight: bold;
+        }
+
+        .register-text a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ================= HOME LINK ================= */
+
+        .home-link {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #555;
+
+            font-size: 14px;
+        }
+
+        .home-link:hover {
+
+            color: #4f46e5;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 500px) {
+
+            .login-container {
+
+                padding: 30px 25px;
+            }
+
+            .logo {
+
+                font-size: 24px;
+            }
+
+            .options {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 12px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= LOGIN BOX ================= -->
+
+    <div class="login-container">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            Community Events
+        </div>
+
+
+        <p class="subtitle">
+            Login to your account
+        </p>
+
+
+        <!-- ================= LOGIN FORM ================= -->
+
+        <form id="loginForm">
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="password-container">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword()"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- OPTIONS -->
+
+            <div class="options">
+
+                <label class="remember">
+
+                    <input
+                        type="checkbox"
+                        id="remember"
+                    >
+
+                    Remember me
+
+                </label>
+
+
+                <a
+                    href="#"
+                    class="forgot-password"
+                    onclick="forgotPassword()"
+                >
+                    Forgot Password?
+                </a>
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+                Login
+            </button>
+
+
+            <!-- MESSAGE -->
+
+            <p id="message"></p>
+
+
+        </form>
+
+
+        <!-- REGISTER -->
+
+        <p class="register-text">
+
+            Don't have an account?
+
+            <a href="register.html">
+                Create an Account
+            </a>
+
+        </p>
+
+
+        <!-- HOME -->
+
+        <a
+            href="index.html"
+            class="home-link"
+        >
+            ← Back to Home
+        </a>
+
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+
+        /* ================= SHOW / HIDE PASSWORD ================= */
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const button =
+                document.querySelector(".show-password");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                button.textContent = "Hide";
+
+            } else {
+
+                password.type = "password";
+
+                button.textContent = "Show";
+
+            }
+
+        }
+
+
+        /* ================= LOGIN ================= */
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+
+                const email =
+                    document.getElementById("email").value.trim();
+
+                const password =
+                    document.getElementById("password").value.trim();
+
+                const message =
+                    document.getElementById("message");
+
+
+                if (email === "" || password === "") {
+
+                    message.textContent =
+                        "Please enter email and password.";
+
+                    message.style.color = "red";
+
+                    return;
+                }
+
+
+                if (password.length < 6) {
+
+                    message.textContent =
+                        "Password must contain at least 6 characters.";
+
+                    message.style.color = "red";
+
+                    return;
+                }
+
+
+                message.textContent =
+                    "Login successful!";
+
+                message.style.color = "green";
+
+
+                /*
+                    This is currently frontend-only.
+
+                    Later, we will connect this login
+                    form to your backend/database.
+                */
+
+            });
+
+
+        /* ================= FORGOT PASSWORD ================= */
+
+        function forgotPassword() {
+
+            alert(
+                "Password reset functionality will be added later."
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

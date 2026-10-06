@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Community Event Management System</title>
+
+    <style>
+        /* ---------- GENERAL ---------- */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* ---------- NAVIGATION BAR ---------- */
+
+        nav {
+            width: 100%;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #4f46e5;
+        }
+
+        .login-btn {
+            background-color: #4f46e5;
+            color: white !important;
+            padding: 10px 18px;
+            border-radius: 6px;
+        }
+
+        .register-btn {
+            background-color: #22c55e;
+            color: white !important;
+            padding: 10px 18px;
+            border-radius: 6px;
+        }
+
+
+        /* ---------- HERO SECTION ---------- */
+
+        .hero {
+            min-height: 550px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
+
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #7c3aed
+            );
+
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: white;
+            color: #4f46e5;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .hero-btn:hover {
+            background-color: #eeeeee;
+        }
+
+
+        /* ---------- SECTION ---------- */
+
+        .section {
+            padding: 70px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 34px;
+            margin-bottom: 15px;
+            color: #222;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+
+        /* ---------- EVENT CARDS ---------- */
+
+        .event-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .event-image {
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+            background-color: #e0e7ff;
+        }
+
+        .event-content {
+            padding: 22px;
+        }
+
+        .event-content h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #222;
+        }
+
+        .event-content p {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        .event-btn {
+            display: inline-block;
+            margin-top: 15px;
+            background-color: #4f46e5;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+        }
+
+
+        /* ---------- ABOUT SECTION ---------- */
+
+        .about {
+            background-color: white;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .about-content p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+
+        /* ---------- FEATURES ---------- */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .feature {
+            background-color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+
+        /* ---------- CONTACT ---------- */
+
+        .contact {
+            text-align: center;
+        }
+
+        .contact p {
+            margin: 12px 0;
+            color: #555;
+            font-size: 17px;
+        }
+
+
+        /* ---------- FOOTER ---------- */
+
+        footer {
+            background-color: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+
+        /* ---------- RESPONSIVE DESIGN ---------- */
+
+        @media (max-width: 900px) {
+
+            .event-container,
+            .features {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .event-container,
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVIGATION BAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            Community Events
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">Home</a>
+
+            <a href="events.html">Events</a>
+
+            <a href="#about">About</a>
+
+            <a href="#contact">Contact</a>
+
+            <a href="login.html" class="login-btn">
+                Login
+            </a>
+
+            <a href="register.html" class="register-btn">
+                Register
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Discover & Join Community Events
+            </h1>
+
+            <p>
+                Connect with your community, discover exciting events,
+                participate in activities, and create unforgettable
+                experiences together.
+            </p>
+
+            <a href="events.html" class="hero-btn">
+                Explore Events
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= UPCOMING EVENTS ================= -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            Upcoming Events
+        </h2>
+
+        <p class="section-description">
+            Explore some of the upcoming events in your community.
+        </p>
+
+
+        <div class="event-container">
+
+
+            <!-- EVENT 1 -->
+
+            <div class="event-card">
+
+                <div class="event-image">
+                    🏆
+                </div>
+
+                <div class="event-content">
+
+                    <h3>
+                        Community Sports Day
+                    </h3>
+
+                    <p>
+                        📅 20 September 2026
+                    </p>
+
+                    <p>
+                        🕐 10:00 AM
+                    </p>
+
+                    <p>
+                        📍 Community Ground
+                    </p>
+
+                    <a href="events.html" class="event-btn">
+                        View Details
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- EVENT 2 -->
+
+            <div class="event-card">
+
+                <div class="event-image">
+                    🎨
+                </div>
+
+                <div class="event-content">
+
+                    <h3>
+                        Art & Craft Workshop
+                    </h3>
+
+                    <p>
+                        📅 25 September 2026
+                    </p>
+
+                    <p>
+                        🕐 2:00 PM
+                    </p>
+
+                    <p>
+                        📍 Community Hall
+                    </p>
+
+                    <a href="events.html" class="event-btn">
+                        View Details
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- EVENT 3 -->
+
+            <div class="event-card">
+
+                <div class="event-image">
+                    🎉
+                </div>
+
+                <div class="event-content">
+
+                    <h3>
+                        Cultural Festival
+                    </h3>
+
+                    <p>
+                        📅 30 September 2026
+                    </p>
+
+                    <p>
+                        🕐 6:00 PM
+                    </p>
+
+                    <p>
+                        📍 Town Community Center
+                    </p>
+
+                    <a href="events.html" class="event-btn">
+                        View Details
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT SECTION ================= -->
+
+    <section class="section about" id="about">
+
+        <h2 class="section-title">
+            About Our System
+        </h2>
+
+        <div class="about-content">
+
+            <p>
+                The Community Event Management System is a web-based
+                platform designed to help communities organize,
+                manage, and participate in events easily.
+            </p>
+
+            <br>
+
+            <p>
+                Users can discover upcoming events, register for events,
+                manage their registrations, and provide feedback.
+                Event organizers can create and manage events,
+                participants, and volunteers.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            Why Use Our Platform?
+        </h2>
+
+        <p class="section-description">
+            Everything you need to participate in community events.
+        </p>
+
+
+        <div class="features">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📅
+                </div>
+
+                <h3>
+                    Discover Events
+                </h3>
+
+                <p>
+                    Find upcoming community events
+                    in one convenient place.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🎫
+                </div>
+
+                <h3>
+                    Easy Registration
+                </h3>
+
+                <p>
+                    Register for your favorite events
+                    quickly and easily.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🤝
+                </div>
+
+                <h3>
+                    Community Participation
+                </h3>
+
+                <p>
+                    Connect with people and participate
+                    in activities within your community.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT SECTION ================= -->
+
+    <section class="section contact" id="contact">
+
+        <h2 class="section-title">
+            Contact Us
+        </h2>
+
+        <p>
+            📧 Email: communityevents@example.com
+        </p>
+
+        <p>
+            📞 Phone: +91 98765 43210
+        </p>
+
+        <p>
+            📍 Location: Community Event Center
+        </p>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 Community Event Management System
+        </p>
+
+        <p>
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
